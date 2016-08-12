@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>去广告</title>
+  <style>
+  h4{
+    text-align: center;
+  }
+  div{
+    width: 620px;
+    margin: 50px auto;
+  }
+  div input{
+    border: 0;
+    outline: 0;
+    position: relative;
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    border-bottom:1px solid #d9d9d9;
+  }
+  div{
+    
+    text-align: center; 
+  }
+
+  div button{
+    font-size: 16px;
+    line-height: 24px;
+    width: 4em;
+  }
+
+  </style>
+</head>
+<script>
+
+//http://v.youku.com/v_show/id_XMTY2NjM0Mjc2NA==.html?f=27789218&o=1
+
+
+  window.onload = function(){
+    var btn = document.getElementsByTagName('button')[0];
+    var oInput = document.getElementById('youku-video');
+    var youkuVideoId = '';
+    
+    var oIframe = document.getElementsByTagName('iframe')[0];
+
+    console.log(oIframe.src.split('id='));
+
+      btn.onclick = function(){
+        youkuVideoId = oInput.value.split('id_')[1].split('.html')[0];
+        if(youkuVideoId!=''){
+          oIframe.src = oIframe.src.split('id=')[0]+'id='+ youkuVideoId;
+          console.log(oIframe.src);
+        }else{
+          return;
+        }
+        
+      } 
+  }
+</script>
+<body>
+  <h4><label for="youku-video">请输入优酷视频播放页面地址</label></h4>
+  <div>  
+    <input type="text" id="youku-video">
+  </div>
+  <div><button>确认</button></div>
+<!-- 优酷去广告版代码 -->
+<div>
+  <iframe src="http://www.haofangyuan.net/youku/videoyk.jsp?token=v&width=620&height=400&auto=no&id=XMTY2NTkyMzc1Ng==" width="620" height="400" marginheight="0" marginwidth="0" frameborder="0" scrolling="no"></iframe>
+
+</div>
+
+<!-- <iframe src="http://www.baidu.com/?token=v&width=620&height=400&auto=no&id=XMTY2NTkyMzc1Ng==" width="620" height="400" marginheight="0" marginwidth="0" frameborder="0" scrolling="no"></iframe>
+
+<embed src="http://player.youku.com/player.php/sid/XMTU1NDc1NTY4NA==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed> -->
+
+<!-- 优酷普通版
+<iframe height=498 width=510 src="http://player.youku.com/embed/XMTY2NTkyMzc1Ng==" frameborder=0 allowfullscreen></iframe>
+
+腾讯普通版
+<iframe frameborder="0" width="640" height="498" src="http://v.qq.com/iframe/player.html?vid=b0317ojldvq&tiny=0&auto=0" allowfullscreen></iframe>
+ -->
+
+</body>
+</html>
