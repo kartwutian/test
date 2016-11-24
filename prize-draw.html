@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>算一卦</title>
+    <title>欢乐抽奖</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
@@ -12,8 +12,8 @@
     <meta name="Keywords" content="" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 
-    <link rel="stylesheet" type="css" href="css/global.css" />
-    <link rel="stylesheet" type="css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="global.css" />
+    <link rel="stylesheet" type="text/css" href="common.css" />
     <link rel="stylesheet" href="layer.css">
     <script src="jquery.1.8.3.js" type="text/javascript" charset="utf-8"></script>
     <script src="layer.js"></script>
@@ -34,33 +34,15 @@
       .text-white{
         color: #fff;
       }
-      
-      
-      
-      html,body{
-        height: 100%;
-        background-color: #FF4351;
+      .red{
+        background-color: #db3652; 
       }
-
-
-      .bhz-mod-content{
-        width: 100%;
-        min-height: 100%;
-       
-      }
-      .bhz-mod-content>header>h1{
-        font-size: 20px;
-        color: #fff;
-        text-align: center;
-        line-height: 80px;
-      }
-      .bhz-mod-content>.bhz-mod-prizeDraw-list{
+      ul{
         width: 300px;
         font-size: 0;
-        margin: 20px auto 50px;
-
+        margin: 50px auto;
       }
-      .bhz-mod-content>.bhz-mod-prizeDraw-list>li{
+      li{
         display: inline-block;
         font-size: 20px;
         width: 100px;
@@ -70,64 +52,46 @@
         border: 1px solid #ddd;
         text-align: center;
         color: #fff;
+
       }
-      .bhz-mod-content>.bhz-mod-prizeDraw-list>.bmp-list-btn{
-        border-radius: 100%;
-        background-color: rgb(222, 179, 66);
-      }
-      .bhz-mod-content>.bhz-mod-prizeDraw-list>li.red{
-        background-color: #db3652; 
-      }
-      .transparent-shadow{
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: transparent;
-        z-index: 100;
-      }
-      .layui-m-layerbtn span[no] {
-        color: #ff4351;
+      .btn{
+        background-color: #db3652;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        line-height: 40px;
+        margin: 0 10px;
+        border-radius: 5px;
       }
     </style>
   
   </head>
 
   <body>
-    <section class="bhz-mod-content">
-      <header>
-        <h1>欢乐抽奖</h1>
-      </header>
-      <ul class="bhz-mod-prizeDraw-list">
-        <li id="item-1" class="bmp-list-item red">打</li>
-        <li id="item-2" class="bmp-list-item">踹</li>
-        <li id="item-3" class="bmp-list-item">骂</li>
-        <li id="item-8" class="bmp-list-item">揍</li>
-        <li id="start-btn" class="bmp-list-btn">来算一卦</li>
-        <li id="item-4" class="bmp-list-item">疼</li>
-        <li id="item-7" class="bmp-list-item">亲</li>
-        <li id="item-6" class="bmp-list-item">宠</li>
-        <li id="item-5" class="bmp-list-item">溺</li>
-      </ul> 
-
-      <section class="bhz-mod-prizeDraw-rules">
-        
-      </section>
-
-    </section>
-
-
-    <section class="transparent-shadow" style="display:none;"></section>
+    <ul>
+       <li class="red">100爱豆</li>
+       <li>100爱豆</li>
+       <li>100爱豆</li>
+       <li>1张优惠券</li>
+       <li>100爱豆</li>
+       <li>100爱豆</li>
+       <li>100爱豆</li>
+       <li>100爱豆</li>
+       <li>1000爱豆</li>
+     </ul> 
+     <div class="btn">
+       开始抽奖
+     </div>
   </body>
   <script>
 
     
 
-    $("#start-btn").click(function(){
+    $(".btn").click(function(){
       init();
       prizeDraw(randomNum(),show);
-      $(".transparent-shadow").show();
+      $(this).hide();
+
     });
 
     //生成随机整数，用于控制中奖num，44<randomNum<54
@@ -141,40 +105,36 @@
    
     // 初始化界面
     function init(){
-      $(".bhz-mod-prizeDraw-list>.bmp-list-item").removeClass("red");
-      $("#item-1").addClass("red");
+      $("ul>li").removeClass("red");
+      $("ul>li").eq(0).addClass("red");
     }
 
     // 抽奖动画结束后的回调函数
     function show(){
-      $(".transparent-shadow").hide();
+      $(".btn").show();
       layer.open({
         title: [
-          '客官',
-          'background-color: #fff; color:#666;'
+          '恭喜您获得',
+          'background-color: #FF4351; color:#fff;'
           ],
-        content: '来'+$(".red").text()+'本宝宝吧！！',
-        style: 'background:#FF4351; color:#fff; fontsize:16px;',
-        btn: ['ok','继续'],
-        yes: function(){},
-        no: function(){}
+        content: $(".red").text(),
+        btn: 'ok'
       });
     }
 
     // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
     function prizeDraw( num, fn){
-
-      for(var i = 1; i < num+1; i++){
+      for(var i = 0; i < num; i++){
         (function(e){
           var n = e%9;          
           setTimeout(function(){
-            $("#item-"+n).removeClass("red");
+            $("ul>li").eq(n).removeClass("red");
             if(n==8){
-              $("#item-1").addClass("red");
+              $("ul>li").eq(0).addClass("red");
             }else{
-              $("#item-"+(n+1)).addClass("red");
+              $("ul>li").eq(n+1).addClass("red");
             }
-            if(e==num){
+            if(e==num-1){
               fn();
             }
           },2*(e*e+50))
