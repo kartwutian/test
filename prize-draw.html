@@ -34,15 +34,33 @@
       .text-white{
         color: #fff;
       }
-      .red{
-        background-color: #db3652; 
+      
+      
+      
+      html,body{
+        height: 100%;
+        background-color: #FF4351;
       }
-      ul{
+
+
+      .bhz-mod-content{
+        width: 100%;
+        min-height: 100%;
+       
+      }
+      .bhz-mod-content>header>h1{
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        line-height: 80px;
+      }
+      .bhz-mod-content>.bhz-mod-prizeDraw-list{
         width: 300px;
         font-size: 0;
-        margin: 50px auto;
+        margin: 20px auto 50px;
+
       }
-      li{
+      .bhz-mod-content>.bhz-mod-prizeDraw-list>li{
         display: inline-block;
         font-size: 20px;
         width: 100px;
@@ -52,46 +70,64 @@
         border: 1px solid #ddd;
         text-align: center;
         color: #fff;
-
       }
-      .btn{
-        background-color: #db3652;
-        color: #fff;
-        font-size: 16px;
-        text-align: center;
-        line-height: 40px;
-        margin: 0 10px;
-        border-radius: 5px;
+      .bhz-mod-content>.bhz-mod-prizeDraw-list>.bmp-list-btn{
+        border-radius: 100%;
+        background-color: rgb(222, 179, 66);
+      }
+      .bhz-mod-content>.bhz-mod-prizeDraw-list>li.red{
+        background-color: #db3652; 
+      }
+      .transparent-shadow{
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        z-index: 100;
+      }
+      .layui-m-layerbtn span[no] {
+        color: #ff4351;
       }
     </style>
   
   </head>
 
   <body>
-    <ul>
-       <li class="red">100爱豆</li>
-       <li>100爱豆</li>
-       <li>100爱豆</li>
-       <li>1张优惠券</li>
-       <li>100爱豆</li>
-       <li>100爱豆</li>
-       <li>100爱豆</li>
-       <li>100爱豆</li>
-       <li>1000爱豆</li>
-     </ul> 
-     <div class="btn">
-       开始抽奖
-     </div>
+    <section class="bhz-mod-content">
+      <header>
+        <h1>欢乐抽奖</h1>
+      </header>
+      <ul class="bhz-mod-prizeDraw-list">
+        <li id="item-1" class="bmp-list-item red">100爱豆</li>
+        <li id="item-2" class="bmp-list-item">100爱豆</li>
+        <li id="item-3" class="bmp-list-item">100爱豆</li>
+        <li id="item-8" class="bmp-list-item">1张优惠券</li>
+        <li id="start-btn" class="bmp-list-btn">开始抽奖</li>
+        <li id="item-4" class="bmp-list-item">100爱豆</li>
+        <li id="item-7" class="bmp-list-item">100爱豆</li>
+        <li id="item-6" class="bmp-list-item">100爱豆</li>
+        <li id="item-5" class="bmp-list-item">1000爱豆</li>
+      </ul> 
+
+      <section class="bhz-mod-prizeDraw-rules">
+        
+      </section>
+
+    </section>
+
+
+    <section class="transparent-shadow" style="display:none;"></section>
   </body>
   <script>
 
     
 
-    $(".btn").click(function(){
+    $("#start-btn").click(function(){
       init();
       prizeDraw(randomNum(),show);
-      $(this).hide();
-
+      $(".transparent-shadow").show();
     });
 
     //生成随机整数，用于控制中奖num，44<randomNum<54
@@ -105,36 +141,42 @@
    
     // 初始化界面
     function init(){
-      $("ul>li").removeClass("red");
-      $("ul>li").eq(0).addClass("red");
+      $(".bhz-mod-prizeDraw-list>.bmp-list-item").removeClass("red");
+      $("#item-1").addClass("red");
     }
 
     // 抽奖动画结束后的回调函数
     function show(){
-      $(".btn").show();
+      $(".transparent-shadow").hide();
       layer.open({
         title: [
           '恭喜您获得',
-          'background-color: #FF4351; color:#fff;'
+          'background-color: #fff; color:#666;'
           ],
         content: $(".red").text(),
-        btn: 'ok'
+        style: 'background:#FF4351; color:#fff; fontsize:16px;',
+        btn: ['ok','继续'],
+        yes: function(){
+          return
+        },
+        no: function(){}
       });
     }
 
     // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
     function prizeDraw( num, fn){
-      for(var i = 0; i < num; i++){
+
+      for(var i = 1; i < num+1; i++){
         (function(e){
           var n = e%9;          
           setTimeout(function(){
-            $("ul>li").eq(n).removeClass("red");
+            $("#item-"+n).removeClass("red");
             if(n==8){
-              $("ul>li").eq(0).addClass("red");
+              $("#item-1").addClass("red");
             }else{
-              $("ul>li").eq(n+1).addClass("red");
+              $("#item-"+(n+1)).addClass("red");
             }
-            if(e==num-1){
+            if(e==num){
               fn();
             }
           },2*(e*e+50))
