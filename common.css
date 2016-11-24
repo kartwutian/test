@@ -1,0 +1,12 @@
+
+.footer-bottom{position: fixed;bottom: 0;left: 0;height: 49px;z-index: 99;border-top: 1px solid #ddd;background-color: #fff;width: 100%;font-size: 0;opacity: .98;}
+.footer-bottom .tab-item{font-size: 12px;display: inline-block;text-align: center;color: #888;width: 33.3%;}
+.footer-bottom .icons{background: url(../img/icons.png) no-repeat;background-size: 96px;width: 24px;height: 24px;display: block;margin: 3px auto;}
+.footer-bottom .tab-item.active{color: #43AC43;}
+.footer-bottom .tab-item.active .home-page{background-position: 0 -24px;}
+.footer-bottom .tab-item .initiate-page{background-position: -24px 0;}
+.footer-bottom .tab-item.active .initiate-page{background-position: -24px -24px;}
+.footer-bottom .tab-item .news-page{background-position: -48px 0;}
+.footer-bottom .tab-item.active .news-page{background-position: -48px -24px;}
+.footer-bottom .tab-item .member-page{background-position: -72px 0;}
+.footer-bottom .tab-item.active .member-page{background-position: -72px -24px;}
