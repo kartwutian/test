@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>欢乐抽奖</title>
+    <title>算一卦</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
@@ -12,11 +12,11 @@
     <meta name="Keywords" content="" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 
-    <link rel="stylesheet" type="text/css" href="css/global.css" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" href="js/layer/layer.css">
-    <script src="js/jquery.1.8.3.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/layer/layer.js"></script>
+    <link rel="stylesheet" type="css" href="css/global.css" />
+    <link rel="stylesheet" type="css" href="css/common.css" />
+    <link rel="stylesheet" href="layer.css">
+    <script src="jquery.1.8.3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="layer.js"></script>
     
     <style>
       .text-red{
@@ -100,15 +100,15 @@
         <h1>欢乐抽奖</h1>
       </header>
       <ul class="bhz-mod-prizeDraw-list">
-        <li id="item-1" class="bmp-list-item red">100爱豆</li>
-        <li id="item-2" class="bmp-list-item">100爱豆</li>
-        <li id="item-3" class="bmp-list-item">100爱豆</li>
-        <li id="item-8" class="bmp-list-item">1张优惠券</li>
-        <li id="start-btn" class="bmp-list-btn">开始抽奖</li>
-        <li id="item-4" class="bmp-list-item">100爱豆</li>
-        <li id="item-7" class="bmp-list-item">100爱豆</li>
-        <li id="item-6" class="bmp-list-item">100爱豆</li>
-        <li id="item-5" class="bmp-list-item">1000爱豆</li>
+        <li id="item-1" class="bmp-list-item red">打</li>
+        <li id="item-2" class="bmp-list-item">踹</li>
+        <li id="item-3" class="bmp-list-item">骂</li>
+        <li id="item-8" class="bmp-list-item">揍</li>
+        <li id="start-btn" class="bmp-list-btn">来算一卦</li>
+        <li id="item-4" class="bmp-list-item">疼</li>
+        <li id="item-7" class="bmp-list-item">亲</li>
+        <li id="item-6" class="bmp-list-item">宠</li>
+        <li id="item-5" class="bmp-list-item">溺</li>
       </ul> 
 
       <section class="bhz-mod-prizeDraw-rules">
@@ -150,10 +150,10 @@
       $(".transparent-shadow").hide();
       layer.open({
         title: [
-          '恭喜您获得',
+          '客官',
           'background-color: #fff; color:#666;'
           ],
-        content: $(".red").text(),
+        content: '来'+$(".red").text()+'本宝宝吧！！',
         style: 'background:#FF4351; color:#fff; fontsize:16px;',
         btn: ['ok','继续'],
         yes: function(){},
