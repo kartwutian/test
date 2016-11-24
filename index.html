@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>今日事</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="" />
+    <meta name="Keywords" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <link rel="stylesheet" type="text/css" href="global.css" />
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" href="layer.css">
+    <script src="jquery.1.8.3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="layer/layer.js"></script>
+    
+    <style>
+      .text-red{
+        color: #db3652;
+      }
+      .text-gray{
+        color: #666;
+      }
+      .text-blue{
+        color: #0079fe;
+      }
+      .text-dark{
+        color: #333;
+      }
+      .text-white{
+        color: #fff;
+      }
+
+      .bhz-mod-header{
+        position: relative;
+        padding: 0 10px;
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #f1eeec;
+        background-color: #fff;
+        
+      }
+      .bhz-mod-header .bhz-mod-header-title{
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .red{
+        background-color: #db3652; 
+      }
+      ul{
+        width: 300px;
+        font-size: 0;
+        margin: 50px auto;
+      }
+      li{
+        display: inline-block;
+        font-size: 20px;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: #0079fe;
+        border: 1px solid #ddd;
+        text-align: center;
+        color: #fff;
+
+      }
+      .btn{
+        background-color: #db3652;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        line-height: 40px;
+        margin: 0 10px;
+        border-radius: 5px;
+      }
+    </style>
+  
+  </head>
+
+  <body>
+    <header class="bhz-mod-header">
+       <h1 class="bhz-mod-header-title text-red">算一卦</h1>
+    </header>
+    <ul>
+       <li class="red">打胡松</li>
+       <li>揍胡松</li>
+       <li>踹胡松</li>
+       <li>亲胡松</li>
+       <li>去逛街</li>
+       <li>打扇子</li>
+       <li>揍扇子</li>
+       <li>踹扇子</li>
+       <li>亲扇子</li>
+     </ul> 
+     <div class="btn">
+       来算一卦
+     </div>
+  </body>
+  <script>
+
+    
+
+    $(".btn").click(function(){
+      init();
+      prizeDraw(randomNum(),show);
+      $(this).hide();
+
+    });
+
+    //生成随机整数，用于控制中奖num，44<randomNum<54
+    function randomNum(){
+      return Math.floor(Math.random()*9+45);
+    }
+    // 测试生成的随机数
+    // for(var i = 0 ;i<100;i++){
+    //   console.log(randomNum());
+    // }
+   
+    // 初始化界面
+    function init(){
+      $("ul>li").removeClass("red");
+      $("ul>li").eq(0).addClass("red");
+    }
+
+    // 抽奖动画结束后的回调函数
+    function show(){
+      $(".btn").show();
+      layer.open({
+        title: [
+          '今日汝需',
+          'background-color: #fff; color:#666;'
+          ],
+        content: $(".red").text()+' , 以免血光之灾',
+        style: 'fontsize:20px;border:none; background-color:#FF4351; color:#fff;',
+        btn: 'ok'
+      });
+    }
+
+    // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
+    function prizeDraw( num, fn){
+      for(var i = 0; i < num; i++){
+        (function(e){
+          var n = e%9;          
+          setTimeout(function(){
+            $("ul>li").eq(n).removeClass("red");
+            if(n==8){
+              $("ul>li").eq(0).addClass("red");
+            }else{
+              $("ul>li").eq(n+1).addClass("red");
+            }
+            if(e==num-1){
+              fn();
+            }
+          },2*(e*e+50))
+        })(i);
+      }
+    };
+  
+  
+  
+  </script>
+</html>
