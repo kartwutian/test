@@ -49,23 +49,39 @@
        
       }
       .bhz-mod-content>header>h1{
-        font-size: 20px;
+        font-size: 24px;
         color: #fff;
         text-align: center;
         line-height: 80px;
+        text-shadow: 1px  1px 1px #ccc,
+                          0 0 10px #fff,
+                           0 0 20px #fff,
+                           0 0 30px #fff,
+                           0 0 40px #ff00de,
+                           0 0 70px #ff00de,
+                           0 0 80px #ff00de,
+                           0 0 100px #ff00de,
+                           0 0 150px #ff00de;
       }
       .bhz-mod-content>.bhz-mod-prizeDraw-list{
-        width: 300px;
+        width: 270px;
         font-size: 0;
         margin: 20px auto 50px;
+        position: relative;
 
+      }
+      .bhz-mod-content>.bhz-mod-prizeDraw-rules{
+        width: 310px;
+        margin: 0 auto;
+        color: #ccc;
+        line-height: 2;
       }
       .bhz-mod-content>.bhz-mod-prizeDraw-list>li{
         display: inline-block;
-        font-size: 20px;
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
+        font-size: 16px;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
         background-color: #0079fe;
         border: 1px solid #ddd;
         text-align: center;
@@ -90,6 +106,29 @@
       .layui-m-layerbtn span[no] {
         color: #ff4351;
       }
+
+
+      .light{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 100%;
+        width: 10px;
+        height: 10px;        
+      }
+      
+      .color-0{
+        background-color: #fff;
+        box-shadow:0px 0px 20px #fff ;
+      }
+      .color-1{
+        background-color: #6f6;
+        box-shadow:0px 0px 20px #6f6 ;
+      }
+      .color-2{
+        background-color: #ff0;
+        box-shadow:0px 0px 20px #ff0 ;
+      }
     </style>
   
   </head>
@@ -112,79 +151,136 @@
       </ul> 
 
       <section class="bhz-mod-prizeDraw-rules">
-        
+
+        <!-- <dl>
+          <dt>1.</dt>
+          <dd>每次抽奖将扣除200爱豆</dd>
+          <dt>2.</dt>
+          <dd>每次抽奖将扣除200爱豆</dd>
+        </dl> -->
+        <p>1.每次抽奖将扣除200爱豆</p>
+        <p>1.每次抽奖将扣除200爱豆200爱豆200爱豆200爱豆200爱豆200爱豆200爱豆200爱豆200爱豆200爱豆</p>
       </section>
 
     </section>
 
 
     <section class="transparent-shadow" style="display:none;"></section>
-  </body>
-  <script>
-
     
+    <script>
 
-    $("#start-btn").click(function(){
-      init();
-      prizeDraw(randomNum(),show);
-      $(".transparent-shadow").show();
-    });
+      // 初始化渲染跑马灯界面
+      initLights(-20,-20,300);
 
-    //生成随机整数，用于控制中奖num，44<randomNum<54
-    function randomNum(){
-      return Math.floor(Math.random()*9+45);
-    }
-    // 测试生成的随机数
-    // for(var i = 0 ;i<100;i++){
-    //   console.log(randomNum());
-    // }
-   
-    // 初始化界面
-    function init(){
-      $(".bhz-mod-prizeDraw-list>.bmp-list-item").removeClass("red");
-      $("#item-1").addClass("red");
-    }
+      $("#start-btn").click(function(){
 
-    // 抽奖动画结束后的回调函数
-    function show(){
-      $(".transparent-shadow").hide();
-      layer.open({
-        title: [
-          '恭喜您获得',
-          'background-color: #fff; color:#666;'
-          ],
-        content: $(".red").text(),
-        style: 'background:#FF4351; color:#fff; fontsize:16px;',
-        btn: ['ok','继续'],
-        yes: function(){
-          return
-        },
-        no: function(){}
+        layer.open({
+          content: '抽奖将扣除200爱豆！',
+          style: 'background:#FF4351; color:#fff; fontsize:16px;',
+          btn: ['ok','取消'],
+          yes: function(index){
+            init();
+            prizeDraw(randomNum(),show);
+            $(".transparent-shadow").show();
+            layer.close(index);
+          }
+        });
       });
-    }
 
-    // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
-    function prizeDraw( num, fn){
-
-      for(var i = 1; i < num+1; i++){
-        (function(e){
-          var n = e%9;          
-          setTimeout(function(){
-            $("#item-"+n).removeClass("red");
-            if(n==8){
-              $("#item-1").addClass("red");
-            }else{
-              $("#item-"+(n+1)).addClass("red");
-            }
-            if(e==num){
-              fn();
-            }
-          },2*(e*e+50))
-        })(i);
+      //生成随机整数，用于控制中奖num，44<randomNum<54
+      function randomNum(){
+        return Math.floor(Math.random()*9+45);
       }
-    };
-  
-  
-  
-  </script>
+      // 测试生成的随机数
+      // for(var i = 0 ;i<100;i++){
+      //   console.log(randomNum());
+      // }
+    
+      // 封装初始化跑马灯
+      function initLights(startX,startY,len){
+
+        var lights ='';
+
+        for(var i = 0; i <= len/20; i++){
+          var k = i%3;
+          lights += '<div class="light color-'+k+'" style="top: '+startY+'px; left: '+(startX+20*i)+'px"></div>'; 
+          lights += '<div class="light color-'+k+'" style="left: '+startX+'px; top: '+(startY+20*i)+'px"></div>';
+          lights += '<div class="light color-'+k+'" style="left: '+(startX+len)+'px; top: '+(startY+20*i)+'px"></div>';
+          lights += '<div class="light color-'+k+'" style="top: '+(startY+len)+'px; left: '+(startX+20*i)+'px"></div>'; 
+        }
+        $('ul.bhz-mod-prizeDraw-list').prepend(lights);
+        // console.log(lights);
+        $('ul.bhz-mod-prizeDraw-list').append('<div id="btn">start</div>');
+
+      }
+
+
+      // 封装每次点击重置函数
+      function init(){
+        $(".bhz-mod-prizeDraw-list>.bmp-list-item").removeClass("red");
+        $("#item-1").addClass("red");
+      }
+
+      // 抽奖动画结束后的回调函数
+      function show(){
+        $(".transparent-shadow").hide();
+        layer.open({
+          title: [
+            '恭喜您获得',
+            'background-color: #fff; color:#666;'
+            ],
+          content: $(".red").text(),
+          style: 'background:#FF4351; color:#fff; fontsize:16px;',
+          btn: ['ok','继续'],
+          yes: function(index){
+            layer.close(index);
+          }
+        });
+      }
+
+      // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
+      function prizeDraw( num, fn){
+        var aDiv = $('div.light');
+
+        for(var i = 1; i < num+1; i++){
+          (function(e){
+            var n = e%9;          
+            setTimeout(function(){
+
+              //实现跑马灯动画
+              for(var j = 0, len = aDiv.length; j < len; j++){
+                // console.log(aDiv[j].className)
+                // console.log(aDiv[j].className.match(/light color-0/));
+                var oDiv = aDiv[j];
+                if(oDiv.className.match(/0/g)){
+                  oDiv.className = oDiv.className.replace(/0/,1)
+                }else if(oDiv.className.match(/1/g)){
+                  oDiv.className = oDiv.className.replace(/1/,2)
+                }else{
+                  oDiv.className = oDiv.className.replace(/2/,0)
+                }
+                 
+              }
+
+              // 实现九宫格动画
+              $("#item-"+n).removeClass("red");
+              if(n==8){
+                $("#item-1").addClass("red");
+              }else{
+                $("#item-"+(n+1)).addClass("red");
+              }
+              if(e==num){
+                fn();
+              }
+            },2*(e*e+50))
+          })(i);
+        }
+      };
+    
+    
+    
+    </script>
+    
+  </body>
+ 
 </html>
