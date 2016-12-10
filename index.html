@@ -1,86 +1,169 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>去广告</title>
-  <style>
-  h4{
-    text-align: center;
-  }
-  div{
-    width: 620px;
-    margin: 50px auto;
-  }
-  div input{
-    border: 0;
-    outline: 0;
-    position: relative;
-    width: 100%;
-    font-size: 16px;
-    line-height: 24px;
-    border-bottom:1px solid #d9d9d9;
-  }
-  div{
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>今日事</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="" />
+    <meta name="Keywords" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <link rel="stylesheet" type="text/css" href="global.css" />
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" href="layer.css">
+    <script src="jquery.1.8.3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="layer.js"></script>
     
-    text-align: center; 
-  }
+    <style>
+      .text-red{
+        color: #db3652;
+      }
+      .text-gray{
+        color: #666;
+      }
+      .text-blue{
+        color: #0079fe;
+      }
+      .text-dark{
+        color: #333;
+      }
+      .text-white{
+        color: #fff;
+      }
 
-  div button{
-    font-size: 16px;
-    line-height: 24px;
-    width: 4em;
-  }
-
-  </style>
-</head>
-<script>
-
-//http://v.youku.com/v_show/id_XMTY2NjM0Mjc2NA==.html?f=27789218&o=1
-
-
-  window.onload = function(){
-    var btn = document.getElementsByTagName('button')[0];
-    var oInput = document.getElementById('youku-video');
-    var youkuVideoId = '';
-    
-    var oIframe = document.getElementsByTagName('iframe')[0];
-
-    console.log(oIframe.src.split('id='));
-
-      btn.onclick = function(){
-        youkuVideoId = oInput.value.split('id_')[1].split('.html')[0];
-        if(youkuVideoId!=''){
-          oIframe.src = oIframe.src.split('id=')[0]+'id='+ youkuVideoId;
-          console.log(oIframe.src);
-        }else{
-          return;
-        }
+      .bhz-mod-header{
+        position: relative;
+        padding: 0 10px;
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #f1eeec;
+        background-color: #fff;
         
-      } 
-  }
-</script>
-<body>
-  <h4><label for="youku-video">请输入优酷视频播放页面地址</label></h4>
-  <div>  
-    <input type="text" id="youku-video">
-  </div>
-  <div><button>确认</button></div>
-<!-- 优酷去广告版代码 -->
-<div>
-  <iframe src="https://www.haofangyuan.net/youku/videoyk.jsp?token=v&width=620&height=400&auto=no&id=XMTY2NTkyMzc1Ng==" width="620" height="400" marginheight="0" marginwidth="0" frameborder="0" scrolling="no"></iframe>
+      }
+      .bhz-mod-header .bhz-mod-header-title{
+        text-align: center;
+        font-size: 14px;
+      }
 
-</div>
+      .red{
+        background-color: #db3652; 
+      }
+      ul{
+        width: 300px;
+        font-size: 0;
+        margin: 50px auto;
+      }
+      li{
+        display: inline-block;
+        font-size: 20px;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: #0079fe;
+        border: 1px solid #ddd;
+        text-align: center;
+        color: #fff;
 
-<!-- <iframe src="http://www.baidu.com/?token=v&width=620&height=400&auto=no&id=XMTY2NTkyMzc1Ng==" width="620" height="400" marginheight="0" marginwidth="0" frameborder="0" scrolling="no"></iframe>
+      }
+      .btn{
+        background-color: #db3652;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        line-height: 40px;
+        margin: 0 10px;
+        border-radius: 5px;
+      }
+    </style>
+  
+  </head>
 
-<embed src="http://player.youku.com/player.php/sid/XMTU1NDc1NTY4NA==/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed> -->
+  <body>
+    <header class="bhz-mod-header">
+       <h1 class="bhz-mod-header-title text-red">算一卦</h1>
+    </header>
+    <ul>
+       <li class="red">打胡松</li>
+       <li>揍胡松</li>
+       <li>踹胡松</li>
+       <li>亲胡松</li>
+       <li>去逛街</li>
+       <li>打扇子</li>
+       <li>揍扇子</li>
+       <li>踹扇子</li>
+       <li>亲扇子</li>
+     </ul> 
+     <div class="btn">
+       来算一卦
+     </div>
+  </body>
+  <script>
 
-<!-- 优酷普通版
-<iframe height=498 width=510 src="http://player.youku.com/embed/XMTY2NTkyMzc1Ng==" frameborder=0 allowfullscreen></iframe>
+    
 
-腾讯普通版
-<iframe frameborder="0" width="640" height="498" src="http://v.qq.com/iframe/player.html?vid=b0317ojldvq&tiny=0&auto=0" allowfullscreen></iframe>
- -->
+    $(".btn").click(function(){
+      init();
+      prizeDraw(randomNum(),show);
+      $(this).hide();
 
-</body>
+    });
+
+    //生成随机整数，用于控制中奖num，44<randomNum<54
+    function randomNum(){
+      return Math.floor(Math.random()*9+45);
+    }
+    // 测试生成的随机数
+    // for(var i = 0 ;i<100;i++){
+    //   console.log(randomNum());
+    // }
+   
+    // 初始化界面
+    function init(){
+      $("ul>li").removeClass("red");
+      $("ul>li").eq(0).addClass("red");
+    }
+
+    // 抽奖动画结束后的回调函数
+    function show(){
+      $(".btn").show();
+      layer.open({
+        title: [
+          '今日汝需',
+          'background-color: #fff; color:#666;'
+          ],
+        content: $(".red").text()+' , 以免血光之灾',
+        style: 'fontsize:20px;border:none; background-color:#FF4351; color:#fff;',
+        btn: 'ok'
+      });
+    }
+
+    // 抽奖动画实现，num为中奖号码，fn为动画结束时的回调函数
+    function prizeDraw( num, fn){
+      for(var i = 0; i < num; i++){
+        (function(e){
+          var n = e%9;          
+          setTimeout(function(){
+            $("ul>li").eq(n).removeClass("red");
+            if(n==8){
+              $("ul>li").eq(0).addClass("red");
+            }else{
+              $("ul>li").eq(n+1).addClass("red");
+            }
+            if(e==num-1){
+              fn();
+            }
+          },2*(e*e+50))
+        })(i);
+      }
+    };
+  
+  
+  
+  </script>
 </html>
+
